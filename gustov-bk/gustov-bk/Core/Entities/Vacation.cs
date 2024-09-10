@@ -4,5 +4,5 @@ public class Vacation
     public int RequestId {get;set;}
     public DateOnly StartDate {get;set;} 
     public DateOnly EndDate {get;set;} 
-    public Request Request {get;set;}
+    public Request? Request {get;set;}
 }
