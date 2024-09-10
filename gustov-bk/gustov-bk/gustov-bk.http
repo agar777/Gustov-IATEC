@@ -1,0 +1,6 @@
+@gustov_bk_HostAddress = http://localhost:5222
+
+GET {{gustov_bk_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
