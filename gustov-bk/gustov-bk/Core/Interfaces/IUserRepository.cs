@@ -1,4 +1,4 @@
-public interface IUser
+public interface IUserRepository
 {
     Task<IEnumerable<User>> GetAll();
     Task<User> GetById(int id);

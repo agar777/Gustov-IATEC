@@ -1,4 +1,4 @@
-public interface IRole
+public interface IRoleRepository
 {
     Task<IEnumerable<Role>> GetAll();
     Task<Role> GetById(int id);
