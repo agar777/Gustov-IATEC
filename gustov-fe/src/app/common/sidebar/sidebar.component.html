@@ -1,0 +1,59 @@
+<div
+    class="sidebar-area bg-white transition"
+    [ngClass]="{'active': isToggled}"
+>
+    <div class="logo bg-white">
+        <a routerLink="/" class="d-flex align-items-center">
+            <img src="assets/images/logo-icon.svg" alt="logo-icon">
+            <span class="fw-extrabold">
+                Trinta
+            </span>
+        </a>
+    </div>
+    <div
+        class="burger-menu transition cursor-pointer"
+        [ngClass]="{'active': isToggled}"
+        (click)="toggle()"
+    >
+        <span class="top-bar transition bg-dark d-block"></span>
+        <span class="middle-bar transition bg-dark d-block"></span>
+        <span class="bottom-bar transition bg-dark d-block"></span>
+    </div>
+    <ng-scrollbar visibility="hover">
+        <div class="sidebar-inner">
+            <div class="sidebar-menu">
+                <mat-accordion>
+                    <span class="sub-title text-body">
+                        PRINCIPAL
+                    </span>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i-feather name="home"></i-feather>
+                                <span class="title">
+                                    Dashboard
+                                </span>
+                                <span class="trinta-badge">
+                                    1
+                                </span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Inicio
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
+                    <a routerLink="/users" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="users"></i-feather>
+                        <span class="title">
+                            Usuarios
+                        </span>
+                    </a>
+                </mat-accordion>
+            </div>
+        </div>
+    </ng-scrollbar>
+</div>

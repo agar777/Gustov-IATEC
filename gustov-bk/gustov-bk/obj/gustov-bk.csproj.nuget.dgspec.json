@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PROYECTOS C#\\Gustov-IATEC\\gustov-bk\\gustov-bk\\gustov-bk.csproj": {}
+    "D:\\PROYECTOS CSHARP\\Gustov-IATEC\\gustov-bk\\gustov-bk\\gustov-bk.csproj": {}
   },
   "projects": {
-    "D:\\PROYECTOS C#\\Gustov-IATEC\\gustov-bk\\gustov-bk\\gustov-bk.csproj": {
+    "D:\\PROYECTOS CSHARP\\Gustov-IATEC\\gustov-bk\\gustov-bk\\gustov-bk.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PROYECTOS C#\\Gustov-IATEC\\gustov-bk\\gustov-bk\\gustov-bk.csproj",
+        "projectUniqueName": "D:\\PROYECTOS CSHARP\\Gustov-IATEC\\gustov-bk\\gustov-bk\\gustov-bk.csproj",
         "projectName": "gustov-bk",
-        "projectPath": "D:\\PROYECTOS C#\\Gustov-IATEC\\gustov-bk\\gustov-bk\\gustov-bk.csproj",
+        "projectPath": "D:\\PROYECTOS CSHARP\\Gustov-IATEC\\gustov-bk\\gustov-bk\\gustov-bk.csproj",
         "packagesPath": "C:\\Users\\karla\\.nuget\\packages\\",
-        "outputPath": "D:\\PROYECTOS C#\\Gustov-IATEC\\gustov-bk\\gustov-bk\\obj\\",
+        "outputPath": "D:\\PROYECTOS CSHARP\\Gustov-IATEC\\gustov-bk\\gustov-bk\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\karla\\AppData\\Roaming\\NuGet\\NuGet.Config",

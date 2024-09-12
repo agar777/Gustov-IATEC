@@ -1,0 +1,14 @@
+<app-breadcrumbs [title]="'Usuarios'" [home]="'Dashboard'" ></app-breadcrumbs>
+<mat-card  class="trinta-card users-list-card mb-25 bg-white border-none d-block">
+  <mat-card-header>
+    <mat-card-title>
+      <h5 class="mt-0 mb-0">
+        Lista de Usuarios
+      </h5>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      <app-table [columns]="columns" [dataSource]="dataSource" [paginator]="paginator"></app-table>
+      <mat-paginator [pageSizeOptions]="[20, 10, 5]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

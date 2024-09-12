@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oXB5V/jsGkE=",
+  "dgSpecHash": "Iv7G5ysiCLs=",
   "success": true,
-  "projectFilePath": "D:\\PROYECTOS C#\\Gustov-IATEC\\gustov-bk\\gustov-bk\\gustov-bk.csproj",
+  "projectFilePath": "D:\\PROYECTOS CSHARP\\Gustov-IATEC\\gustov-bk\\gustov-bk\\gustov-bk.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\karla\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\karla\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.8\\microsoft.aspnetcore.authentication.jwtbearer.8.0.8.nupkg.sha512",
