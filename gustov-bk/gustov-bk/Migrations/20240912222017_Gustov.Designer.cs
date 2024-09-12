@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace gustov_bk.Migrations
 {
     [DbContext(typeof(GustovContext))]
-    [Migration("20240910201245_Gustov")]
+    [Migration("20240912222017_Gustov")]
     partial class Gustov
     {
         /// <inheritdoc />
@@ -26,7 +26,7 @@ namespace gustov_bk.Migrations
             MySqlModelBuilderExtensions.HasCharSet(modelBuilder, "utf8mb4");
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Company", b =>
+            modelBuilder.Entity("Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,12 +34,21 @@ namespace gustov_bk.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Address")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateOnly>("HireDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Companies");
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("Request", b =>
@@ -50,18 +59,18 @@ namespace gustov_bk.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<DateOnly>("RequestDate")
                         .HasColumnType("date");
 
                     b.Property<string>("Status")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Requests");
                 });
@@ -90,8 +99,8 @@ namespace gustov_bk.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
+                    b.Property<string>("Address")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .HasColumnType("longtext");
@@ -108,12 +117,7 @@ namespace gustov_bk.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<DateOnly>("StartDate")
-                        .HasColumnType("date");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.HasIndex("RoleId");
 
@@ -146,30 +150,22 @@ namespace gustov_bk.Migrations
 
             modelBuilder.Entity("Request", b =>
                 {
-                    b.HasOne("User", "User")
+                    b.HasOne("Employee", "Employee")
                         .WithMany("Requests")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("User", b =>
                 {
-                    b.HasOne("Company", "Company")
-                        .WithMany("Users")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Company");
 
                     b.Navigation("Role");
                 });
@@ -185,9 +181,9 @@ namespace gustov_bk.Migrations
                     b.Navigation("Request");
                 });
 
-            modelBuilder.Entity("Company", b =>
+            modelBuilder.Entity("Employee", b =>
                 {
-                    b.Navigation("Users");
+                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("Request", b =>
@@ -198,11 +194,6 @@ namespace gustov_bk.Migrations
             modelBuilder.Entity("Role", b =>
                 {
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("User", b =>
-                {
-                    b.Navigation("Requests");
                 });
 #pragma warning restore 612, 618
         }

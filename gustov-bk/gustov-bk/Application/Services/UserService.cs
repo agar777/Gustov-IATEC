@@ -13,13 +13,11 @@ public class UserService: IUserService
         return users.Select(e=>new UserDto{
             Id = e.Id,
             RoleId = e.RoleId,
-            CompanyId = e.CompanyId,
             Name = e.Name,
             LastName = e.LastName,
-            StartDate  = e.StartDate,
+            Address  = e.Address,
             Email = e.Email,
             Role = e.Role,
-            Company = e.Company
         });
     }
 
@@ -34,13 +32,11 @@ public class UserService: IUserService
         return new UserDto{
             Id = user.Id,
             RoleId = user.RoleId,
-            CompanyId = user.CompanyId,
             Name = user.Name,
             LastName = user.LastName,
-            StartDate  = user.StartDate,
+            Address  = user.Address,
             Email = user.Email,
             Role = user.Role,
-            Company = user.Company
         };
     }
 
@@ -48,10 +44,9 @@ public class UserService: IUserService
     {
         var user = new User{
             RoleId = userDto.RoleId,
-            CompanyId = userDto.CompanyId,
             Name = userDto.Name,
             LastName = userDto.LastName,
-            StartDate  = userDto.StartDate,
+            Address  = userDto.Address,
             Email = userDto.Email,
             Password = userDto.Password
         };
@@ -64,10 +59,9 @@ public class UserService: IUserService
         if (user!=null)
         {
             user.RoleId = userDto.RoleId;
-            user.CompanyId = userDto.CompanyId;
             user.Name = userDto.Name;
             user.LastName = userDto.LastName;
-            user.StartDate  = userDto.StartDate;
+            user.Address  = userDto.Address;
             user.Email = userDto.Email;
             user.Password = userDto.Password;
             await _userRepository.Update(user);
