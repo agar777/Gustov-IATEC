@@ -40,9 +40,9 @@ public class RolesService: IRoleService
         await _roleRepository.Save(role);
     }
 
-    public async Task Update(int id, RoleDto roleDto)
+    public async Task Update(RoleDto roleDto)
     {
-        var role = await _roleRepository.GetById(id);
+        var role = await _roleRepository.GetById(roleDto.Id);
         if (role != null)
         {
             role.Name = roleDto.Name;

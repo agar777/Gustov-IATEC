@@ -34,4 +34,20 @@ public class RoleController : ControllerBase
         await _roleService.Save(roleDto);
         return CreatedAtAction(nameof(GetById), new {id = roleDto.Id},roleDto);
     }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] RoleDto roleDto)
+    {
+        if (id != roleDto.Id)
+            return BadRequest();
+
+        await _roleService.Update(roleDto);
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await _roleService.Delete(id);
+        return NoContent();
+    }
 }
