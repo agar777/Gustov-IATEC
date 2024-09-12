@@ -1,15 +1,15 @@
 
 public class RolesService: IRoleService
 {
-    private readonly IRoleRepository _roleRepository;
+    private readonly IRoleRepository roleRepository;
     public RolesService(IRoleRepository roleRepository)
     {
-        _roleRepository = roleRepository;
+        this.roleRepository = roleRepository;
     }
 
     public async Task<IEnumerable<RoleDto>> GetAll()
     {
-        var roles = await _roleRepository.GetAll();
+        var roles = await roleRepository.GetAll();
         return roles.Select(e=> new RoleDto{
             Id = e.Id,
             Name = e.Name
@@ -19,7 +19,7 @@ public class RolesService: IRoleService
 
     public async Task<RoleDto> GetById(int id)
     {
-        var role = await _roleRepository.GetById(id);
+        var role = await roleRepository.GetById(id);
         if (role == null)
         {
             return null;
@@ -37,22 +37,22 @@ public class RolesService: IRoleService
             Name = roleDto.Name
         };
 
-        await _roleRepository.Save(role);
+        await roleRepository.Save(role);
     }
 
     public async Task Update(RoleDto roleDto)
     {
-        var role = await _roleRepository.GetById(roleDto.Id);
+        var role = await roleRepository.GetById(roleDto.Id);
         if (role != null)
         {
             role.Name = roleDto.Name;
-            await _roleRepository.Update(role);
+            await roleRepository.Update(role);
         }
 
     }
 
      public async Task Delete(int id)
     {
-        await _roleRepository.Delete(id);
+        await roleRepository.Delete(id);
     }
 }

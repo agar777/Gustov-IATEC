@@ -4,17 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly IUserService _userService;
+    private readonly IUserService userService;
 
     public UserController(IUserService userService)
     {
-        _userService = userService;
+        this.userService = userService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var user = await _userService.GetAll();
+        var user = await userService.GetAll();
         return Ok(user);
     }
     
@@ -22,7 +22,7 @@ public class UserController : ControllerBase
 
     public async Task<IActionResult> GetById(int id)
     {
-        var user = await _userService.GetById(id);
+        var user = await userService.GetById(id);
         if (user == null)
         {
             return NotFound();
@@ -32,7 +32,7 @@ public class UserController : ControllerBase
 
     [HttpPost]
     public async Task<IActionResult> Save([FromBody] UserDto userDto){
-        await _userService.Save(userDto);
+        await userService.Save(userDto);
         return CreatedAtAction(nameof(GetById), new {id = userDto.Id},userDto);
     }
     [HttpPut("{id}")]
@@ -41,14 +41,14 @@ public class UserController : ControllerBase
         if (id != userDto.Id)
             return BadRequest();
 
-        await _userService.Update(userDto);
+        await userService.Update(userDto);
         return NoContent();
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        await _userService.Delete(id);
+        await userService.Delete(id);
         return NoContent();
     }
 }

@@ -4,16 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 [Route("api/[controller]")]
 public class RoleController : ControllerBase
 {
-    private readonly IRoleService _roleService;
+    private readonly IRoleService roleService;
     public RoleController(IRoleService roleService)
     {
-        _roleService = roleService;
+        this.roleService = roleService;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var roles = await _roleService.GetAll();
+        var roles = await roleService.GetAll();
         return Ok(roles);
     }
     
@@ -21,7 +21,7 @@ public class RoleController : ControllerBase
 
     public async Task<IActionResult> GetById(int id)
     {
-        var role = await _roleService.GetById(id);
+        var role = await roleService.GetById(id);
         if (role == null)
         {
             return NotFound();
@@ -31,7 +31,7 @@ public class RoleController : ControllerBase
 
     [HttpPost]
     public async Task<IActionResult> Save([FromBody] RoleDto roleDto){
-        await _roleService.Save(roleDto);
+        await roleService.Save(roleDto);
         return CreatedAtAction(nameof(GetById), new {id = roleDto.Id},roleDto);
     }
     [HttpPut("{id}")]
@@ -40,14 +40,14 @@ public class RoleController : ControllerBase
         if (id != roleDto.Id)
             return BadRequest();
 
-        await _roleService.Update(roleDto);
+        await roleService.Update(roleDto);
         return NoContent();
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        await _roleService.Delete(id);
+        await roleService.Delete(id);
         return NoContent();
     }
 }

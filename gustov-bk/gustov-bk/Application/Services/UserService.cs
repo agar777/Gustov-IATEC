@@ -1,15 +1,15 @@
 
 public class UserService: IUserService
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUserRepository userRepository;
     public UserService(IUserRepository userRepository)
     {
-        _userRepository = userRepository;
+        this.userRepository = userRepository;
     }
 
      public async Task<IEnumerable<UserDto>> GetAll()
     {
-        var users = await _userRepository.GetAll();
+        var users = await userRepository.GetAll();
         return users.Select(e=>new UserDto{
             Id = e.Id,
             RoleId = e.RoleId,
@@ -23,7 +23,7 @@ public class UserService: IUserService
 
     public async Task<UserDto> GetById(int id)
     {
-        var user = await _userRepository.GetById(id);
+        var user = await userRepository.GetById(id);
         if (user==null)
         {
             return null;
@@ -50,12 +50,12 @@ public class UserService: IUserService
             Email = userDto.Email,
             Password = userDto.Password
         };
-        await _userRepository.Save(user);
+        await userRepository.Save(user);
     }
 
     public async Task Update(UserDto userDto)
     {
-        var user = await _userRepository.GetById(userDto.Id);
+        var user = await userRepository.GetById(userDto.Id);
         if (user!=null)
         {
             user.RoleId = userDto.RoleId;
@@ -64,12 +64,12 @@ public class UserService: IUserService
             user.Address  = userDto.Address;
             user.Email = userDto.Email;
             user.Password = userDto.Password;
-            await _userRepository.Update(user);
+            await userRepository.Update(user);
         }
     }
 
     public async Task Delete(int id)
     {
-        await _userRepository.Delete(id);
+        await userRepository.Delete(id);
     }
 }
