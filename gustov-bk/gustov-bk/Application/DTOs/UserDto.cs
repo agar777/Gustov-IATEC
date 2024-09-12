@@ -10,5 +10,4 @@ public class UserDto
     public string? Password { get; set; }
     public Role? Role { get; set; }
     public Company? Company { get; set; }
-    public ICollection<Request>? Requests {get;set;}
 }
