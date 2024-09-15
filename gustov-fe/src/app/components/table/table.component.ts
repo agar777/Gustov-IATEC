@@ -19,4 +19,12 @@ export class TableComponent {
     
   }
 
+  isObject(value: any): boolean {
+    return typeof value === 'object' && value !== null;
+  }
+
+  formatObject(obj: any): string {
+    return obj.name
+  }
+
 }

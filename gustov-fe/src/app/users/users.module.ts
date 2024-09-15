@@ -23,6 +23,8 @@ import { TableComponent } from '../components/table/table.component';
     ReactiveFormsModule,
     BreadcrumbsComponent,
     TableComponent
-  ]
+  ],
+  bootstrap: [CreateUsersComponent]
+
 })
 export class UsersModule { }

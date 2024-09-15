@@ -8,11 +8,11 @@ import { SignInComponent } from "./sign-in/sign-in.component";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 
 export const AUTH_ROUTE: Route[] = [
-  {
-    path: "",
-    redirectTo: "signin",
-    pathMatch: "full",
-  },
+  // {
+  //   path: "",
+  //   redirectTo: "signin",
+  //   pathMatch: "full",
+  // },
   {path: '', component: SignInComponent},
   {path: 'sign-up', component: SignUpComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},

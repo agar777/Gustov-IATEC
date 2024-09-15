@@ -1,7 +1,7 @@
 <table mat-table [dataSource]="dataSource" class="w-100">
     @for (item of columns; track $index) {
         <ng-container matColumnDef="{{item}}">
-            <th mat-header-cell *matHeaderCellDef> {{item}} </th>
+            <th mat-header-cell *matHeaderCellDef> {{item|titlecase}} </th>
             <td mat-cell *matCellDef="let element; let i = index">
                 <ng-container [ngSwitch]="item">
                     <ng-container *ngSwitchCase="'Nº'">
@@ -16,7 +16,12 @@
                             </button>
                     </ng-container>
                     <ng-container *ngSwitchDefault>
-                        {{element[item]}}
+                        <ng-container *ngIf="isObject(element[item]); else notObject">
+                            {{ formatObject(element[item]) }}
+                        </ng-container>
+                        <ng-template #notObject>
+                            {{ element[item] }}
+                        </ng-template>
                     </ng-container>
                 </ng-container>
             </td>

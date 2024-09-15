@@ -1,1 +1,107 @@
-<p>create-users works!</p>
+<mat-card
+    class="trinta-card add-user-card mb-25 bg-white border-none d-block"
+>
+    <mat-card-header>
+        <mat-card-title>
+            <h5 class="mt-0 mb-0">
+                Add User
+            </h5>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="form" >
+            <div class="row">
+                <div class="col-lg-6 form-group">
+                    <label class="label d-block fw-medium mb-10">
+                        Name
+                    </label>
+                    <mat-form-field>
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Enter name</mat-label>
+                        <input formControlName="Name" required matInput>
+                        <mat-error *ngIf="form.get('Name')?.hasError('required')">
+                            Name is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 form-group">
+                    <label class="label d-block fw-medium mb-10">
+                        Last Name
+                    </label>
+                    <mat-form-field>
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Enter name</mat-label>
+                        <input formControlName="LastName" required matInput>
+                        <mat-error *ngIf="form.get('LastName')?.hasError('required')">
+                            LastName is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 form-group ">
+                    <label class="label d-block fw-medium mb-10">
+                        Address
+                    </label>
+                    <mat-form-field>
+                        <i-feather name="map-pin"></i-feather>
+                        <mat-label>Your location</mat-label>
+                        <input formControlName="Address" required matInput>
+                        <mat-error *ngIf="form.get('Address')?.hasError('required')">
+                            Address is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 form-group">
+                    <label class="label d-block fw-medium mb-10">
+                        Role
+                    </label>
+                    <mat-form-field>
+                        <i-feather name="list"></i-feather>
+                        <mat-label>Enter role</mat-label>
+                        <mat-select formControlName="RoleId" required >
+                            @for (role of roles; track role) {
+                                <mat-option [value]="role.id" >{{role.name}}</mat-option>
+                            }
+                        </mat-select>
+                        <mat-error *ngIf="form.get('RoleId')?.hasError('required')">
+                            Role is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                    <label class="label d-block fw-medium mb-10">
+                        Email
+                    </label>
+                    <mat-form-field>
+                        <i-feather name="mail"></i-feather>
+                        <mat-label>Enter email address</mat-label>
+                        <input type="email" formControlName="Email" required matInput>
+                        <mat-error *ngIf="form.get('Email')?.hasError('required')">
+                            Email is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                    <label class="label d-block fw-medium mb-10">
+                        Password
+                    </label>
+                    <mat-form-field>
+                        <i-feather name="key"></i-feather>
+                        <mat-label>Enter password</mat-label>
+                        <input type="password" formControlName="Password" required  matInput>
+                        <mat-error *ngIf="form.get('Password')?.hasError('required')">
+                            Password is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button mat-stroked-button color="primary" type="submit">
+                    Save Information
+                </button>
+                <button mat-stroked-button color="accent" routerLink="/users" style="margin-left: 20px;" type="button">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

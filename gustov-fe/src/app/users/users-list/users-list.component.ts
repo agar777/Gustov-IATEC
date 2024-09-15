@@ -13,9 +13,11 @@ export class UsersListComponent implements OnInit{
 
   columns: string[] = [
     'Nº',
-    'full_name',
-    'username',
+    'name',
+    'lastName',
     'email',
+    'address',
+    'role',
     'actions'
   ];
 
@@ -30,7 +32,7 @@ export class UsersListComponent implements OnInit{
   }
 
   usersList() {
-    this.userService.getAll().subscribe(data=>{
+    this.userService.getAll().subscribe((data)=>{
       this.dataSource = new MatTableDataSource<User>(data);
       this.dataSource.paginator = this.paginator;
     })
