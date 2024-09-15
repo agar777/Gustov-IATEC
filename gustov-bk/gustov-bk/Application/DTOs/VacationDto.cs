@@ -4,5 +4,6 @@ public class VacationDto
     public int RequestId {get;set;}
     public DateOnly StartDate {get;set;} 
     public DateOnly EndDate {get;set;} 
-    public Request? Request {get;set;}
+    public int TotalDays{get;set;}
+    public RequestDto? Request {get;set;}
 }

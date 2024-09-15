@@ -1,4 +1,6 @@
 
+using BCrypt.Net;
+
 public class UserService: IUserService
 {
     private readonly IUserRepository userRepository;
@@ -17,7 +19,10 @@ public class UserService: IUserService
             LastName = e.LastName,
             Address  = e.Address,
             Email = e.Email,
-            Role = e.Role,
+            Role = e.Role != null ? new RoleDto{
+                Id = e.Role.Id,
+                Name = e.Role.Name
+            }: null
         });
     }
 
@@ -36,7 +41,10 @@ public class UserService: IUserService
             LastName = user.LastName,
             Address  = user.Address,
             Email = user.Email,
-            Role = user.Role,
+            Role = user.Role != null ? new RoleDto{
+                Id = user.Role.Id,
+                Name = user.Role.Name
+            }:null
         };
     }
 
@@ -48,7 +56,7 @@ public class UserService: IUserService
             LastName = userDto.LastName,
             Address  = userDto.Address,
             Email = userDto.Email,
-            Password = userDto.Password
+            Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password)
         };
         await userRepository.Save(user);
     }
@@ -63,7 +71,7 @@ public class UserService: IUserService
             user.LastName = userDto.LastName;
             user.Address  = userDto.Address;
             user.Email = userDto.Email;
-            user.Password = userDto.Password;
+            user.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
             await userRepository.Update(user);
         }
     }
