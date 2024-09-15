@@ -8,6 +8,7 @@ import {WebMaterialModule} from "../webmaterial.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BreadcrumbsComponent } from '../components/breadcrumbs/breadcrumbs.component';
 import { TableComponent } from '../components/table/table.component';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { TableComponent } from '../components/table/table.component';
     BreadcrumbsComponent,
     TableComponent
   ],
-  bootstrap: [CreateUsersComponent]
+  providers: [MessageService]
 
 })
 export class UsersModule { }

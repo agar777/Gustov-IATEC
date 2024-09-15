@@ -41,15 +41,21 @@
                         <ul class="sidebar-sub-menu">
                             <li class="sidemenu-item">
                                 <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
-                                    Inicio
+                                    Home
                                 </a>
                             </li>
                         </ul>
                     </mat-expansion-panel>
                     <a routerLink="/users" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i-feather name="user"></i-feather>
+                        <span class="title">
+                            Users
+                        </span>
+                    </a>
+                    <a routerLink="/employees" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                         <i-feather name="users"></i-feather>
                         <span class="title">
-                            Usuarios
+                            employees
                         </span>
                     </a>
                 </mat-accordion>

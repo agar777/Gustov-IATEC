@@ -24,6 +24,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FeathericonsModule } from './icons/feathericons/feathericons.module';
 import { ToastModule } from 'primeng/toast';
 import {MatMenu, MatMenuModule} from "@angular/material/menu";
+import {MatNativeDateModule} from '@angular/material/core';
+
 @NgModule({
     imports:[
         FeathericonsModule,
@@ -61,7 +63,8 @@ import {MatMenu, MatMenuModule} from "@angular/material/menu";
         MatBadgeModule,
         MatDialogModule,
         ToastModule,
-        MatMenuModule
+        MatMenuModule,
+        MatNativeDateModule
     ],
     declarations: [
     ],

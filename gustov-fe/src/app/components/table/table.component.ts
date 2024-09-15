@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { WebMaterialModule } from '../../webmaterial.module';
 import { MatPaginator } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
+import { User } from '../../core/models/user.model';
 
 @Component({
   selector: 'app-table',
@@ -15,6 +16,9 @@ export class TableComponent {
   @Input() dataSource:any;
   @Input() paginator:MatPaginator;
   @Input() columns:any;
+  @Output()delete:EventEmitter<any> = new EventEmitter<any>();
+  @Output()update:EventEmitter<any> = new EventEmitter<any>();
+  
   constructor() {   
     
   }
@@ -25,6 +29,14 @@ export class TableComponent {
 
   formatObject(obj: any): string {
     return obj.name
+  }
+
+  edit(id:any){
+    this.update.emit(id);
+  }
+  
+  destroy(id:any){
+    this.delete.emit(id);
   }
 
 }

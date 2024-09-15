@@ -71,7 +71,10 @@ public class UserService: IUserService
             user.LastName = userDto.LastName;
             user.Address  = userDto.Address;
             user.Email = userDto.Email;
-            user.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
+            if (!string.IsNullOrEmpty(userDto.Password))
+            {
+                user.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
+            }
             await userRepository.Update(user);
         }
     }

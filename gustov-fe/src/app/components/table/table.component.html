@@ -8,10 +8,10 @@
                         {{paginator.pageIndex * paginator.pageSize + i + 1}}
                     </ng-container>
                     <ng-container *ngSwitchCase="'actions'" >
-                        <button mat-icon-button color="primary" class="me-1">
+                        <button mat-icon-button color="primary" class="me-1" (click)="edit(element.id)" >
                             <mat-icon matSuffix>mode</mat-icon>
                             </button>
-                            <button mat-icon-button color="warn" >
+                            <button mat-icon-button color="warn" (click)="destroy(element.id)" >
                             <mat-icon matSuffix>delete</mat-icon>
                             </button>
                     </ng-container>

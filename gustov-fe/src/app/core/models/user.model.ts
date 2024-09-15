@@ -1,9 +1,7 @@
-export class User {
-    id: number;
-    roleId:number;
-    name: string;
-    lastName:string;
-    address:string;
+import { Person } from "./person.model";
+
+export class User extends Person {
+    roleId:number;    
     email: string;
     password:string;
   }

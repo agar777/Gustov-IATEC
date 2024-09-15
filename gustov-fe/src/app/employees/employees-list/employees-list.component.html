@@ -1,1 +1,25 @@
-<p>employees-list works!</p>
+<app-breadcrumbs [title]="'Employees'" [home]="'Dashboard'" ></app-breadcrumbs>
+<mat-card  class="trinta-card users-list-card mb-25 bg-white border-none d-block">
+  <mat-card-header>
+    <p-toast position="top-right" key="success" />
+    <p-toast position="top-right" key="error" />
+    <mat-card-title>
+      <h5 class="mt-0 mb-0">
+        Employees List
+      </h5>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="d-flex justify-content-end" >
+        <div class="" >
+          <button mat-stroked-button color="primary" routerLink="/employees/create" >Add Employee</button>
+        </div>
+    </div>
+    <div class="table-responsive">
+      <app-table [columns]="columns" [dataSource]="dataSource" [paginator]="paginator" 
+      (delete)="delete($event)" (update)="update($event)"
+      ></app-table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[20, 10, 5]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

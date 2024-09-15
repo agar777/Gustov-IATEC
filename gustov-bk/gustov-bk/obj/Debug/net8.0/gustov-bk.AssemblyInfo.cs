@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("gustov-bk")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd8fa5c674aed03c7a4d3a9d8152a3861167b152")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+993a7cdcae14a06eae01caf5dab676ce4a0b8136")]
 [assembly: System.Reflection.AssemblyProductAttribute("gustov-bk")]
 [assembly: System.Reflection.AssemblyTitleAttribute("gustov-bk")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

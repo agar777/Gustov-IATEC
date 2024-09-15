@@ -1,9 +1,11 @@
-<app-breadcrumbs [title]="'Usuarios'" [home]="'Dashboard'" ></app-breadcrumbs>
+<app-breadcrumbs [title]="'Users'" [home]="'Dashboard'" ></app-breadcrumbs>
 <mat-card  class="trinta-card users-list-card mb-25 bg-white border-none d-block">
   <mat-card-header>
+    <p-toast position="top-right" key="success" />
+    <p-toast position="top-right" key="error" />
     <mat-card-title>
       <h5 class="mt-0 mb-0">
-        Lista de Usuarios
+        Users List
       </h5>
     </mat-card-title>
   </mat-card-header>
@@ -13,7 +15,11 @@
           <button mat-stroked-button color="primary" routerLink="/users/create" >Add User</button>
         </div>
     </div>
-    <app-table [columns]="columns" [dataSource]="dataSource" [paginator]="paginator"></app-table>
+    <div class="table-responsive">
+      <app-table [columns]="columns" [dataSource]="dataSource" [paginator]="paginator" 
+      (delete)="delete($event)" (update)="update($event)"
+      ></app-table>
+    </div>
     <mat-paginator [pageSizeOptions]="[20, 10, 5]" showFirstLastButtons></mat-paginator>
   </mat-card-content>
 </mat-card>
