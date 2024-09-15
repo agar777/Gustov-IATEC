@@ -2,11 +2,9 @@
 public class VacationRepository : IVacationRepository
 {
     private readonly GustovContext context;
-    private readonly RequestRepository requestRepository;
-    public VacationRepository(GustovContext context, RequestRepository requestRepository)
+    public VacationRepository(GustovContext context)
     {
         this.context = context;
-        this.requestRepository = requestRepository;
     }
 
     public async Task<Vacation> GetById(int id)

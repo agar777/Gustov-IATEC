@@ -13,6 +13,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IEmployeeService, EmployeeService>();
         services.AddScoped<IRequestService, RequestService>();
         services.AddScoped<IVacationService, VacationService>();
+        
+        services.AddScoped<IVacationValidator,VacationValidators>();
 
     }
 }
