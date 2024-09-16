@@ -22,7 +22,7 @@ public class VacationService : IVacationService
         var vacation = await vacationRepository.GetById(id);
         if (vacation == null)
         {
-            return null;
+            return new VacationDto();
         }
 
         return new VacationDto{

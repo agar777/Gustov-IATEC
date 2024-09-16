@@ -23,11 +23,8 @@ public class RequestController: ControllerBase
     public IActionResult GetById(int id)
     {
         var request = requestService.GetById(id);
-        if (request == null)
-        {
-            return NotFound();
-        }
-        return Ok(request);
+        return request is not null ? Ok(request) : NotFound();
+
     }
     
     [HttpPost]

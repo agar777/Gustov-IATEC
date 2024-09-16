@@ -6,20 +6,21 @@ using System.Threading.Tasks;
 
 public class RequestServiceTests
 {
-    private readonly Mock<IRequestRepository> _requestRepository;
-    private readonly Mock<IRequestValidator> _requestValidator;
-    private readonly RequestService _requestService;
+    private readonly Mock<IRequestRepository> requestRepository;
+    private readonly Mock<IRequestValidator> requestValidator;
+    private readonly RequestService requestService;
 
     public RequestServiceTests()
     {
-        _requestRepository = new Mock<IRequestRepository>();
-        _requestValidator = new Mock<IRequestValidator>();
-        _requestService = new RequestService(_requestRepository.Object, _requestValidator.Object);
+        requestRepository = new Mock<IRequestRepository>();
+        requestValidator = new Mock<IRequestValidator>();
+        requestService = new RequestService(requestRepository.Object, requestValidator.Object);
     }
 
     [Fact]
-    public async Task GetAll_ShouldReturnRequestDtos_WhenRequestsExist()
+    public async Task GetAll()
     {
+        // GetAllShouldReturnRequestDtosWhenRequestsExist
         var requests = new List<Request>
         {
             new Request
@@ -39,9 +40,9 @@ public class RequestServiceTests
             }
         };
 
-        _requestRepository.Setup(repo => repo.GetAll()).ReturnsAsync(requests);
+        requestRepository.Setup(repo => repo.GetAll()).ReturnsAsync(requests);
 
-        var result = await _requestService.GetAll();
+        var result = await requestService.GetAll();
 
         var requestDto = result.FirstOrDefault();
         Assert.NotNull(requestDto);
@@ -58,8 +59,9 @@ public class RequestServiceTests
     }
 
     [Fact]
-    public void GetById_ShouldReturnRequestDto_WhenRequestExists()
+    public void GetById()
     {
+        // ShouldReturnRequestDtoWhenRequestExists
         var request = new Request
         {
             Id = 1,
@@ -76,9 +78,9 @@ public class RequestServiceTests
             }
         };
 
-        _requestRepository.Setup(repo => repo.GetById(1)).Returns(request);
+        requestRepository.Setup(repo => repo.GetById(1)).Returns(request);
 
-        var result = _requestService.GetById(1);
+        var result = requestService.GetById(1);
 
         Assert.NotNull(result);
         Assert.Equal(1, result.Id);
@@ -94,16 +96,18 @@ public class RequestServiceTests
     }
 
     [Fact]
-    public void GetById_ShouldReturnNull_WhenRequestDoesNotExist()
+    public void GetByIdWhenRequestDoesNotExist()
     {
-        _requestRepository.Setup(repo => repo.GetById(1)).Returns((Request)null);
-        var result = _requestService.GetById(1);
+        // GetByIdShouldReturnNullWhenRequestDoesNotExist
+        requestRepository.Setup(repo => repo.GetById(1)).Returns((Request)null);
+        var result = requestService.GetById(1);
         Assert.Null(result);
     }
 
     [Fact]
-    public async Task SaveRequest_ShouldCallRepositorySaveRequest_WhenRequestDtoIsValid()
+    public async Task Save()
     {
+        // SaveRequestShouldCallRepositorySaveRequestWhenRequestDtoIsValid
         var requestDto = new RequestDto
         {
             EmployeeId = 1,
@@ -111,12 +115,12 @@ public class RequestServiceTests
             Status = "Pending"
         };
 
-        _requestValidator.Setup(v => v.ValidateRequestByEmployee(_requestRepository.Object, requestDto))
+        requestValidator.Setup(v => v.ValidateRequestByEmployee(requestRepository.Object, requestDto))
                          .Returns(Task.CompletedTask);
 
-        await _requestService.SaveRequest(requestDto);
+        await requestService.SaveRequest(requestDto);
 
-        _requestRepository.Verify(repo => repo.SaveRequest(It.Is<Request>(r =>
+        requestRepository.Verify(repo => repo.SaveRequest(It.Is<Request>(r =>
             r.EmployeeId == requestDto.EmployeeId &&
             r.RequestDate == requestDto.RequestDate &&
             r.Status == requestDto.Status
@@ -124,8 +128,9 @@ public class RequestServiceTests
     }
 
     [Fact]
-    public async Task Update_ShouldCallRepositoryUpdate_WhenRequestExists()
+    public async Task UpdateWhenRequestExists()
     {
+        // UpdateShouldCallRepositoryUpdateWhenRequestExists
         var request = new Request
         {
             Id = 1,
@@ -134,22 +139,21 @@ public class RequestServiceTests
             Status = "Pending"
         };
 
-        _requestRepository.Setup(repo => repo.GetById(1)).Returns(request);
-        await _requestService.Update(1);
+        requestRepository.Setup(repo => repo.GetById(1)).Returns(request);
+        await requestService.Update(1);
 
-        _requestRepository.Verify(repo => repo.Update(It.Is<Request>(r =>
+        requestRepository.Verify(repo => repo.Update(It.Is<Request>(r =>
             r.Id == 1 &&
             r.Status == "APPROVED"
         )), Times.Once);
     }
 
     [Fact]
-    public async Task Update_ShouldNotCallRepositoryUpdate_WhenRequestDoesNotExist()
+    public async Task UpdateWhenRequestDoesNotExist()
     {
-        _requestRepository.Setup(repo => repo.GetById(1)).Returns((Request)null);
-
-        await _requestService.Update(1);
-
-        _requestRepository.Verify(repo => repo.Update(It.IsAny<Request>()), Times.Never);
+        // UpdateShouldNotCallRepositoryUpdateWhenRequestDoesNotExist
+        requestRepository.Setup(repo => repo.GetById(1)).Returns((Request)null);
+        await requestService.Update(1);
+        requestRepository.Verify(repo => repo.Update(It.IsAny<Request>()), Times.Never);
     }
 }

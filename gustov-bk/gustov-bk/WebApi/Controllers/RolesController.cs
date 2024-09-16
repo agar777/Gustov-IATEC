@@ -23,11 +23,7 @@ public class RoleController : ControllerBase
     public async Task<IActionResult> GetById(int id)
     {
         var role = await roleService.GetById(id);
-        if (role == null)
-        {
-            return NotFound();
-        }
-        return Ok(role);
+        return role is not null ? Ok(role) : NotFound();
     }
 
     [HttpPost]

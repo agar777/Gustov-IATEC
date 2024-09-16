@@ -24,11 +24,8 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetById(int id)
     {
         var user = await userService.GetById(id);
-        if (user == null)
-        {
-            return NotFound();
-        }
-        return Ok(user);
+        return user is not null ? Ok(user) : NotFound();
+
     }
 
     [HttpPost]

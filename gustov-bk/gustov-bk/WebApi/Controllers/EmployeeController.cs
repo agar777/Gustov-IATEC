@@ -25,11 +25,7 @@ public class EmployeeController : ControllerBase
     public async Task<IActionResult> GetById(int id)
     {
         var employee = await employeeService.GetById(id);
-        if (employee == null)
-        {
-            return NotFound();
-        }
-        return Ok(employee);
+        return employee is not null ? Ok(employee) : NotFound();
     }
 
     [HttpPost]

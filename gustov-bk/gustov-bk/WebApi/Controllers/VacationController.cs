@@ -17,11 +17,8 @@ public class VacationController: ControllerBase
     public async Task<IActionResult> GetById(int requestId)
     {
         var vacation = await vacationService.GetById(requestId);        
-        if (vacation == null)
-        {
-            return NotFound();
-        }
-        return Ok(vacation);
+        return vacation is not null ? Ok(vacation) : NotFound();
+
     }
     
     [HttpPost]
