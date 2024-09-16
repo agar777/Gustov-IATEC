@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -14,7 +15,7 @@ public class VacationController: ControllerBase
 
     public async Task<IActionResult> GetById(int id)
     {
-        var vacation = await vacationService.GetById(id);
+        var vacation = await vacationService.GetById(id);        
         if (vacation == null)
         {
             return NotFound();
@@ -23,8 +24,15 @@ public class VacationController: ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> Savevacation([FromBody] VacationDto vacationDto){
-        await vacationService.SaveVacation(vacationDto);
-        return CreatedAtAction(nameof(GetById), new {id = vacationDto.Id},vacationDto);
+    public async Task<IActionResult> SaveVacation([FromBody] int requestId){
+        try
+        {
+            await vacationService.SaveVacation(requestId);
+            return Ok(new { message = "Vacation saved successfully." });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
 }

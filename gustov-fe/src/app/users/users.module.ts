@@ -25,7 +25,6 @@ import { MessageService } from 'primeng/api';
     BreadcrumbsComponent,
     TableComponent
   ],
-  providers: [MessageService]
 
 })
 export class UsersModule { }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { WebMaterialModule } from '../../webmaterial.module';
 import { MatPaginator } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
@@ -16,27 +16,33 @@ export class TableComponent {
   @Input() dataSource:any;
   @Input() paginator:MatPaginator;
   @Input() columns:any;
-  @Output()delete:EventEmitter<any> = new EventEmitter<any>();
-  @Output()update:EventEmitter<any> = new EventEmitter<any>();
-  
+  @Input() customActions!: TemplateRef<any>;
+
   constructor() {   
     
   }
 
-  isObject(value: any): boolean {
-    return typeof value === 'object' && value !== null;
+  getColumnName(column: string): string {
+    const parts = column.split('.');
+    const lastPart = parts[parts.length - 1];
+    return this.capitalize(lastPart);
   }
 
-  formatObject(obj: any): string {
-    return obj.name
+  capitalize(word: string): string {
+    return word.charAt(0).toUpperCase() + word.slice(1);
   }
 
-  edit(id:any){
-    this.update.emit(id);
-  }
-  
-  destroy(id:any){
-    this.delete.emit(id);
+  getDynamicProperty(element: any, path: string): any {
+    if (!element || !path) return '';
+    const keys = path.split('.');
+    let value = element;
+    for (const key of keys) {
+      if (value[key] === undefined) {
+        return '';
+      }
+      value = value[key];
+    }
+    return value;
   }
 
 }

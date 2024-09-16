@@ -6,6 +6,7 @@ import { Validators } from 'ngx-editor';
 import { Role } from '../../core/models/role.model';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from '../../core/services/alert.service';
 
 @Component({
   selector: 'app-create-users',
@@ -22,7 +23,7 @@ export class CreateUsersComponent implements OnInit{
     private userService: UsersService,
     private roleService: RoleService,
     private fb: FormBuilder,
-    private messageService: MessageService,
+    private alertService: AlertService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -68,30 +69,21 @@ export class CreateUsersComponent implements OnInit{
   }
 
   save() {
-    const request = this.userId
-      ? this.userService.update(this.userId, this.form.value)
-      : this.userService.save(this.form.value);
-  
-      request.subscribe(data => {
-      this.router.navigate(['/users'])
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Éxito',
-        detail: 'Successfully registered',
-        key: 'success',
-        life: 3000
-      });
-    },
-    error => {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: error.error,
-        key: 'error',
-        life: 3000
-      });
-    }
-  );
+    this.alertService.confirmAction("Save Information").then(result=>{
+      if (result.isConfirmed) {
+        const request = this.userId
+        ? this.userService.update(this.userId, this.form.value)
+        : this.userService.save(this.form.value);    
+        request.subscribe(data => {
+          this.alertService.showSuccessMessage("Successfully registered",()=>{
+            this.router.navigate(['/users']);
+          });
+        },
+        error => {
+          this.alertService.showErrorMessage(error.error);
+        });      
+      }
+    })
   }
 
 }

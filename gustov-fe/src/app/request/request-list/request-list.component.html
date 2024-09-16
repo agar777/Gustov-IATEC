@@ -1,0 +1,32 @@
+<app-breadcrumbs [title]="'Requests'" [home]="'Dashboard'" ></app-breadcrumbs>
+<mat-card  class="trinta-card users-list-card mb-25 bg-white border-none d-block">
+  <mat-card-header>
+    <p-toast position="top-right" key="success" [life]="10000"/>
+    <p-toast position="top-right" key="error" [life]="10000"/>
+    <mat-card-title>
+      <h5 class="mt-0 mb-0">
+        Requests List
+      </h5>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="table-responsive">
+      <app-table [columns]="columns" [dataSource]="dataSource" [paginator]="paginator" [customActions]="customActionTemplate"
+      ></app-table>
+
+      <ng-template #customActionTemplate let-element>
+        @if (element.status == "PENDING") {
+            <button mat-stroked-button color="accent" (click)="approveVacation(element.id)" >
+                Approved Vacation
+            </button>            
+        }
+        @else {
+            <button mat-stroked-button color="primary" (click)="(element.id)" >
+                Vacation Invoice
+            </button> 
+        }
+      </ng-template>
+    </div>
+    <mat-paginator [pageSizeOptions]="[20, 10, 5]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

@@ -1,5 +1,5 @@
 public interface IVacationValidator
 {
-    bool ValidateVacationRequest(IRequestService requestService, VacationDto vacationDto);
-    (int daysPerYearWorked,DateOnly endDate) ValidateVacationDay(IRequestService requestService, VacationDto vacationDto);
+    bool ValidateVacationRequest(IRequestService requestService, int requestId);
+    (int daysPerYearWorked,DateOnly endDate) ValidateVacationDay(IRequestService requestService, int requestId);
 }

@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -10,8 +11,14 @@ public class RequestController: ControllerBase
         this.requestService = requestService;
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var requests = await requestService.GetAll();
+        return Ok(requests);
+    }
+    
     [HttpGet("{id}")]
-
     public IActionResult GetById(int id)
     {
         var request = requestService.GetById(id);
@@ -24,7 +31,14 @@ public class RequestController: ControllerBase
     
     [HttpPost]
     public async Task<IActionResult> SaveRequest([FromBody] RequestDto requestDto){
-        await requestService.SaveRequest(requestDto);
-        return CreatedAtAction(nameof(GetById), new {id = requestDto.Id},requestDto);
+        try
+        {
+            await requestService.SaveRequest(requestDto);
+            return CreatedAtAction(nameof(GetById), new { id = requestDto.Id }, requestDto);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
 }

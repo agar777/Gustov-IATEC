@@ -5,6 +5,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import { User } from '../../core/models/user.model';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { AlertService } from '../../core/services/alert.service';
 
 @Component({
   selector: 'app-users-list',
@@ -19,7 +20,7 @@ export class UsersListComponent implements OnInit{
     'lastName',
     'email',
     'address',
-    'role',
+    'role.name',
     'actions'
   ];
 
@@ -27,7 +28,7 @@ export class UsersListComponent implements OnInit{
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   constructor(private userService: UsersService,
-    private messageService: MessageService,
+    private alertService: AlertService,
     private router: Router
   ) {
   }
@@ -48,16 +49,15 @@ export class UsersListComponent implements OnInit{
   }
 
   delete(userId:any){
-    this.userService.delete(userId).subscribe(data=>{
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Éxito',
-        detail: 'Successfully deleted',
-        key: 'success',
-        life: 3000
-      });
-      this.getAll();
-    })
+    this.alertService.confirmAction("Delete").then(result=>{
+      if (result.isConfirmed) {
+        this.userService.delete(userId).subscribe(data=>{
+          this.alertService.showSuccessMessage("Successfully deleted",()=>{
+            this.getAll();
+          });
+        }) 
+      }
+    })    
   }
 
 }

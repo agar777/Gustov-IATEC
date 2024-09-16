@@ -1,27 +1,19 @@
 <table mat-table [dataSource]="dataSource" class="w-100">
     @for (item of columns; track $index) {
         <ng-container matColumnDef="{{item}}">
-            <th mat-header-cell *matHeaderCellDef> {{item|titlecase}} </th>
+            <th mat-header-cell *matHeaderCellDef> {{getColumnName(item)}} </th>
             <td mat-cell *matCellDef="let element; let i = index">
                 <ng-container [ngSwitch]="item">
                     <ng-container *ngSwitchCase="'Nº'">
                         {{paginator.pageIndex * paginator.pageSize + i + 1}}
                     </ng-container>
-                    <ng-container *ngSwitchCase="'actions'" >
-                        <button mat-icon-button color="primary" class="me-1" (click)="edit(element.id)" >
-                            <mat-icon matSuffix>mode</mat-icon>
-                            </button>
-                            <button mat-icon-button color="warn" (click)="destroy(element.id)" >
-                            <mat-icon matSuffix>delete</mat-icon>
-                            </button>
+                    <ng-container *ngSwitchCase="'actions'" >                      
+                        <ng-container *ngIf="customActions">
+                            <ng-container *ngTemplateOutlet="customActions; context: { $implicit: element }"></ng-container>
+                        </ng-container>
                     </ng-container>
                     <ng-container *ngSwitchDefault>
-                        <ng-container *ngIf="isObject(element[item]); else notObject">
-                            {{ formatObject(element[item]) }}
-                        </ng-container>
-                        <ng-template #notObject>
-                            {{ element[item] }}
-                        </ng-template>
+                        {{ getDynamicProperty(element, item) }}
                     </ng-container>
                 </ng-container>
             </td>

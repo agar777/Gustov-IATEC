@@ -4,6 +4,7 @@ import { EmployeeService } from '../../core/services/employee.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { AlertService } from '../../core/services/alert.service';
 
 @Component({
   selector: 'app-create-employees',
@@ -17,11 +18,9 @@ export class CreateEmployeesComponent implements OnInit{
   constructor( 
     private employeeService: EmployeeService,
     private fb: FormBuilder,
-    private messageService: MessageService,
+    private alertService: AlertService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private datePipe: DatePipe,
-
+    private activatedRoute: ActivatedRoute,    
   ) {
     
   }
@@ -56,33 +55,22 @@ export class CreateEmployeesComponent implements OnInit{
   }
 
   save() {
-    const request = this.employeeId
-      ? this.employeeService.update(this.employeeId, this.form.value)
-      : this.employeeService.save(this.form.value);
-  
-      request.subscribe(data => {
-      this.router.navigate(['/employees'])
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Éxito',
-        detail: 'Successfully registered',
-        key: 'success',
-        life: 3000
-      });
-    },
-    error => {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: error.error,
-        key: 'error',
-        life: 3000
-      });
-    }
-  );
+    this.alertService.confirmAction("Save Information").then(result=>{
+      if (result.isConfirmed){
+        const request = this.employeeId
+        ? this.employeeService.update(this.employeeId, this.form.value)
+        : this.employeeService.save(this.form.value);
+    
+        request.subscribe(data => {
+          this.alertService.showSuccessMessage("Successfully registered",()=>{
+            this.router.navigate(['/employees']);            
+          });
+        },
+        error => {
+          this.alertService.showErrorMessage(error.error);
+        });  
+      }
+    })
   }
-}
-function moment(fecha_inicio: Date) {
-  throw new Error('Function not implemented.');
 }
 

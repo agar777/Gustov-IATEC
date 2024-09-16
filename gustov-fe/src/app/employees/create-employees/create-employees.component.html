@@ -2,8 +2,8 @@
     class="trinta-card add-user-card mb-25 bg-white border-none d-block"
 >
     <mat-card-header>
-        <p-toast position="top-right" key="success" />
-        <p-toast position="top-right" key="error" />
+        <p-toast position="top-right" key="success" [life]="10000" />
+        <p-toast position="top-right" key="error" [life]="10000" />
         <mat-card-title>
             <h5 class="mt-0 mb-0">
                 Add Employee
@@ -69,7 +69,7 @@
                 <button mat-stroked-button color="primary" type="submit" [disabled]="!form.valid" >
                     Save Information
                 </button>
-                <button mat-stroked-button color="accent" routerLink="/users" style="margin-left: 20px;" type="button">
+                <button mat-stroked-button color="accent" routerLink="/employees" style="margin-left: 20px;" type="button">
                     Cancel
                 </button>
             </div>

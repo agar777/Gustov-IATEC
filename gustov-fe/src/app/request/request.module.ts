@@ -1,24 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 
-import { EmployeesRoutingModule } from './employees-routing.module';
-import { EmployeesListComponent } from './employees-list/employees-list.component';
-import { CreateEmployeesComponent } from './create-employees/create-employees.component';
+import { RequestRoutingModule } from './request-routing.module';
+import { RequestListComponent } from './request-list/request-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BreadcrumbsComponent } from '../components/breadcrumbs/breadcrumbs.component';
 import { TableComponent } from '../components/table/table.component';
 import { WebMaterialModule } from '../webmaterial.module';
-import { MessageService } from 'primeng/api';
 
 
 @NgModule({
   declarations: [
-    EmployeesListComponent,
-    CreateEmployeesComponent
+    RequestListComponent,
   ],
   imports: [
     CommonModule,
-    EmployeesRoutingModule,
+    RequestRoutingModule,
     WebMaterialModule,
     FormsModule,
     ReactiveFormsModule,
@@ -28,4 +25,4 @@ import { MessageService } from 'primeng/api';
   providers: [DatePipe]
 
 })
-export class EmployeesModule { }
+export class RequestModule { }

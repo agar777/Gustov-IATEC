@@ -5,6 +5,9 @@ import { EmployeeService } from '../../core/services/employee.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { RequestVacationComponent } from '../../request/requestVacation.component';
+import { AlertService } from '../../core/services/alert.service';
 
 @Component({
   selector: 'app-employees-list',
@@ -15,7 +18,6 @@ export class EmployeesListComponent {
   columns: string[] = [
     'Nº',
     'name',
-    'lastName',
     'address',
     'hireDate',
     'actions'
@@ -26,8 +28,9 @@ export class EmployeesListComponent {
 
   constructor(
     private employeeService: EmployeeService,
-    private messageService: MessageService,
-    private router: Router
+    private alertService: AlertService,
+    private router: Router,
+    private dialog: MatDialog,
   ) {
   }
 
@@ -47,16 +50,31 @@ export class EmployeesListComponent {
   }
 
   delete(userId:any){
-    this.employeeService.delete(userId).subscribe(data=>{
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Éxito',
-        detail: 'Successfully deleted',
-        key: 'success',
-        life: 3000
-      });
-      this.getAll();
-    })
+    this.alertService.confirmAction("Delete").then(result=>{
+      if (result.isConfirmed) {
+        this.employeeService.delete(userId).subscribe(data=>{
+          this.alertService.showSuccessMessage("Successfully deleted",()=>{
+
+            this.getAll();
+          });      
+        })
+      }
+    }) 
+  }
+
+  requestVacation(employeeId:number){
+    const dialogRef = this.dialog.open(RequestVacationComponent,{
+      data: {
+        estado: true,
+        title: 'Request Vacation',
+        employeeId: employeeId
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result){
+        this.getAll();
+      }
+    });
   }
 
 }

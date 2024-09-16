@@ -15,6 +15,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IVacationService, VacationService>();
         
         services.AddScoped<IVacationValidator,VacationValidators>();
+        services.AddScoped<IRequestValidator,RequestValidator>();
 
     }
 }

@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>
+    {{data.title}}
+</h1>
+<form class="register-form m-4" [formGroup]="form" (ngSubmit)="save()" >
+    <p-toast position="top-right" key="success" [life]="10000"/>
+    <p-toast position="top-right" key="error" [life]="10000" />
+    <div mat-dialog-content>
+        <div class="row">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Request Date</mat-label>
+                <input matInput formControlName="requestDate" type="date">
+                <mat-error *ngIf="form.get('requestDate')?.hasError('required')">
+                  Request Date is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div mat-dialog-actions class="mt-0">
+        <button mat-stroked-button color="primary" type="submit" [disabled]="!form.valid" >
+            Save Information
+        </button>
+        <button mat-stroked-button color="accent" (click)="dialogRef.close()" style="margin-left: 20px;" type="button">
+            Cancel
+        </button>
+    </div>
+</form>
