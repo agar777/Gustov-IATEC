@@ -30,6 +30,8 @@ public class VacationService : IVacationService
             RequestId = vacation.RequestId,
             StartDate = vacation.StartDate,
             EndDate = vacation.EndDate,
+            TotalDays= vacationValidator.ValidateVacationDay(requestService,id).daysPerYearWorked,
+            YearsWorked= vacationValidator.ValidateVacationDay(requestService,id).yearsWorked,
             Request = vacation.Request != null ? new RequestDto{
                 Id = vacation.Request.Id,
                 EmployeeId = vacation.Request.EmployeeId,

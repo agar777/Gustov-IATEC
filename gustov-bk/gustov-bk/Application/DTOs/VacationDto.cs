@@ -5,5 +5,6 @@ public class VacationDto
     public DateOnly StartDate {get;set;} 
     public DateOnly EndDate {get;set;} 
     public int TotalDays{get;set;}
+    public int YearsWorked{get;set;}
     public RequestDto? Request {get;set;}
 }

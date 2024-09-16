@@ -11,11 +11,11 @@ public class VacationController: ControllerBase
         this.vacationService = vacationService;
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{requestId}")]
 
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(int requestId)
     {
-        var vacation = await vacationService.GetById(id);        
+        var vacation = await vacationService.GetById(requestId);        
         if (vacation == null)
         {
             return NotFound();

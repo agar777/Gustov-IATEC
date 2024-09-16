@@ -6,6 +6,8 @@ import { VacationService } from '../../core/services/vacation.service';
 import { Vacation } from '../../core/models/vacation.model';
 import { Requests } from '../../core/models/requests.model';
 import { AlertService } from '../../core/services/alert.service';
+import { MatDialog } from '@angular/material/dialog';
+import { VacationInvoiceComponent } from '../../vacation-invoice/vacation-invoice.component';
 
 @Component({
   selector: 'app-request-list',
@@ -30,7 +32,8 @@ export class RequestListComponent {
   constructor(
     private requestService: RequestService,
     private vacationService: VacationService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private dialog: MatDialog,
   ) {
   }
 
@@ -59,6 +62,21 @@ export class RequestListComponent {
           })        
         }
     })
+  }
+
+  vacationInvoice(requestId:number){
+    const dialogRef = this.dialog.open(VacationInvoiceComponent,{
+      data: {
+        estado: true,
+        title: 'Vacation Invoice',
+        requestId: requestId
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result){
+        this.getAll();
+      }
+    });
   }
 
 }

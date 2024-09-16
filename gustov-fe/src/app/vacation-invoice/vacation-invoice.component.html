@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>
+    Vacation Receipt
+</h2>
+<mat-dialog-content class="mat-typography">
+    <div id="printableArea" class="row">
+        <div class="col-md-12">
+            <h3 class="text-center" >GUSTOV RESTAURANT</h3>
+            <p class="text-center" >Vacation Receipt</p>
+            <div class="section">
+                <h5>Employee Details</h5>
+                <table class="details">
+                    <tr>
+                        <th>Full Name:</th>
+                        <td>{{invoice.request.employee.name}} {{invoice.request.employee.lastName}}</td>
+                    </tr>
+                    <tr>
+                        <th>Address:</th>
+                        <td>{{invoice.request.employee.address}}</td>
+                    </tr>
+                    <tr>
+                        <th>Hire Date:</th>
+                        <td>{{invoice.request.employee.hireDate}}</td>
+                    </tr>
+                    <tr>
+                        <th>Years of Service:</th>
+                        <td>{{invoice.yearsWorked}} years</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="section">
+                <h5>Vacation Request Details</h5>
+                <table class="details">
+                    <tr>
+                        <th>Request Date:</th>
+                        <td>{{invoice.request.requestDate}}</td>
+                    </tr>
+                    <tr>
+                        <th>Vacation Start Date:</th>
+                        <td>{{invoice.startDate}}</td>
+                    </tr>
+                    <tr>
+                        <th>Vacation End Date:</th>
+                        <td>{{invoice.endDate}}</td>
+                    </tr>
+                    <tr>
+                        <th>Status:</th>
+                        <td>{{invoice.request.status}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="footer">
+                <p>Thank you for your hard work and dedication!</p>
+                <p>If you have any questions, please contact HR at hrgustovrestaurant.com.</p>
+            </div>
+        </div>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button color="warn" (click)="dialogRef.close()" mat-dialog-close>
+        Cancel
+    </button>
+    <button mat-button  (click)="printDiv('printableArea')" cdkFocusInitial>
+        PRINT
+    </button>
+</mat-dialog-actions>

@@ -1,7 +1,7 @@
 public class VacationValidators: IVacationValidator
 {
 
-    public (int daysPerYearWorked,DateOnly endDate) ValidateVacationDay(IRequestService requestService, int requestId)
+    public (int daysPerYearWorked,DateOnly endDate, int yearsWorked) ValidateVacationDay(IRequestService requestService, int requestId)
     {
         var request = requestService.GetById(requestId);
         int yearsWorked = CalculateYearsWorked(requestService,requestId);
@@ -9,7 +9,7 @@ public class VacationValidators: IVacationValidator
 
         DateTime requestDay = request.RequestDate.ToDateTime(TimeOnly.MinValue);
         DateOnly endDate = DateOnly.FromDateTime(requestDay.AddDays(daysPerYearWorked));
-        return (daysPerYearWorked,endDate);
+        return (daysPerYearWorked,endDate, yearsWorked);
     }
 
     public bool ValidateVacationRequest(IRequestService requestService, int requestId){

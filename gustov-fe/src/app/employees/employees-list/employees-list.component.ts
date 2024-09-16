@@ -18,6 +18,7 @@ export class EmployeesListComponent {
   columns: string[] = [
     'Nº',
     'name',
+    'lastName',
     'address',
     'hireDate',
     'actions'

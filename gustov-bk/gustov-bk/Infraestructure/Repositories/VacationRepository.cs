@@ -14,7 +14,7 @@ public class VacationRepository : IVacationRepository
         return await context.Vacations
         .Include(v=>v.Request)
         .ThenInclude(r => r.Employee) 
-        .FirstOrDefaultAsync(v=> v.Id == id);
+        .FirstOrDefaultAsync(v=> v.RequestId == id);
     }
 
     public async Task SaveVacation(Vacation vacation)
