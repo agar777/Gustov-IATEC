@@ -53,12 +53,12 @@ export class RequestListComponent {
     this.alertService.confirmAction("Save Information").then(result=>{
         if (result.isConfirmed) {
           this.vacationService.save(requestId).subscribe(data=>{
-            this.alertService.showSuccessMessage("Successfully registered",()=>{
+            this.alertService.showSuccessMessage(data.success,()=>{
               this.getAll();
             })
           },
-          error => {
-            this.alertService.showErrorMessage(error.error)
+          error => {            
+            this.alertService.showErrorMessage(error.error.error)
           })        
         }
     })

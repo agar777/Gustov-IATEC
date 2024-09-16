@@ -28,11 +28,11 @@ public class VacationController: ControllerBase
         try
         {
             await vacationService.SaveVacation(requestId);
-            return Ok(new { message = "Vacation saved successfully." });
+            return Ok(new { success = "Vacation saved successfully." });
         }
         catch (InvalidOperationException ex)
         {
-            return BadRequest(new { message = ex.Message });
+            return BadRequest(new { error = ex.Message });
         }
     }
 }
