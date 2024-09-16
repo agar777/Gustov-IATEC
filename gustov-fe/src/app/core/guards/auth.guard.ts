@@ -17,9 +17,9 @@ export class AuthGuard  {
     ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    this.user = this.tokenStorageService.getUser();
+    this.user = this.tokenStorageService.getToken();
 
-    if (this.user.username) {
+    if (this.user) {
       return true;
     }
     this.router.navigate(['/authentication']);

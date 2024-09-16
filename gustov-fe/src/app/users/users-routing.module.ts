@@ -8,15 +8,17 @@ const routes: Routes = [
   {
     path: '',
     component: UsersListComponent,
-    // canActivate:[AuthGuard]
+    canActivate:[AuthGuard]
   },
   {
     path:'create',
-    component: CreateUsersComponent
+    component: CreateUsersComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'edit/:userId',
-    component:CreateUsersComponent
+    component:CreateUsersComponent,
+    canActivate:[AuthGuard]
   }
 ];
 

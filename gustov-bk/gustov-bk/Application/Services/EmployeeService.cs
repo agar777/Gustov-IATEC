@@ -47,12 +47,11 @@ public class EmployeeService: IEmployeeService
 
     public async Task Save(EmployeeDto employeeDto)
     {
-
         var employee = new Employee{
             Name = employeeDto.Name,
             LastName = employeeDto.LastName,
             Address  = employeeDto.Address,
-            HireDate  = employeeDto.HireDate
+            HireDate  = employeeDto.HireDate,
         };
         await employeeRepository.Save(employee);
     }

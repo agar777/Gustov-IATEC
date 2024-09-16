@@ -28,7 +28,7 @@ export class SignInComponent {
         private messageService: MessageService
     ) {
         this.authForm = this.fb.group({
-            username: ['', [Validators.required]],
+            email: ['', [Validators.required]],
             password: ['', [Validators.required, Validators.minLength(6)]],
         });
     }
@@ -48,7 +48,7 @@ export class SignInComponent {
         .subscribe(
             data=>{
                 this.token.saveToken(data.token);
-                this.token.saveUser(data.user);
+                // this.token.saveUser(data.user);
                 this.router.navigate(['dashboard'])
                 this.messageService.add({ severity: 'success', 
                     summary: 'Exito', 

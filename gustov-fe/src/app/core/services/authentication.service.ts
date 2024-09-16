@@ -17,11 +17,11 @@ export class AuthenticationService {
   ) { }
 
   login(credentials: { username: string, password: string }):Observable<any> {
-    return this.http.post<any>('/login', credentials, httpOptions);
+    return this.http.post<any>('/Auth/login', credentials, httpOptions);
   }
 
   logout() {    
-    return this.http.get<any>('/logout')
+    return this.http.get<any>('/Auth/logout')
   }
   
 }

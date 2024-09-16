@@ -78,4 +78,11 @@ export class EmployeesListComponent {
     });
   }
 
+  calculateYearsWorked(hireDate: Date): boolean {
+    let dateObject = new Date(hireDate);
+    let currentDate = new Date().getFullYear();
+    let yearsWorked = currentDate - dateObject.getFullYear();    
+    return yearsWorked>=1;
+  }
+
 }

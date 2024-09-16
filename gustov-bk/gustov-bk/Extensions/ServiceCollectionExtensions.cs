@@ -17,5 +17,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IVacationValidator,VacationValidators>();
         services.AddScoped<IRequestValidator,RequestValidator>();
 
+        services.AddScoped<IJwtService, JwtService>();
+
+        services.AddScoped<AuthCase>();
+
     }
 }

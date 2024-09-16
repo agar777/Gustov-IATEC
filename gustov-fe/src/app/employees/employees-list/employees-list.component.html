@@ -20,14 +20,14 @@
       [customActions]="customActionTemplate"
       ></app-table>
 
-      <ng-template #customActionTemplate let-element>
+        <ng-template #customActionTemplate let-element>
         <button mat-icon-button color="primary" class="me-1" (click)="update(element.id)" >
           <mat-icon matSuffix>mode</mat-icon>
         </button>
         <button mat-icon-button color="warn" (click)="delete(element.id)" >
           <mat-icon matSuffix>delete</mat-icon>
         </button>
-        @if (element.request == null ) {
+        @if (element.request == null && calculateYearsWorked(element.hireDate)) {
           <button mat-stroked-button color="accent" (click)="requestVacation(element.id)" >
             Request Vacation
           </button>
