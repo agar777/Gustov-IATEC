@@ -63,6 +63,7 @@ public class EmployeeServiceTest
             HireDate = new DateOnly(2023, 1, 1)
         };
 
+        employeeRepository.Setup(repo => repo.GetById(1)).ReturnsAsync(employee);
         var result = await employeeService.GetById(1);
 
         Assert.NotNull(result);
