@@ -15,7 +15,16 @@ public class EmployeeService: IEmployeeService
             Name = e.Name,
             LastName = e.LastName,
             Address  = e.Address,   
-            HireDate = e.HireDate
+            HireDate = e.HireDate,
+            Request = e.Requests
+            .OrderByDescending(r => r.RequestDate)
+            .Select(r => new RequestDto 
+            { 
+                Id = r.Id, 
+                RequestDate = r.RequestDate,
+                Status = r.Status
+            })
+            .FirstOrDefault()
         });
     }
 

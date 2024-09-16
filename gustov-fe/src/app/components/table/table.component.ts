@@ -34,15 +34,16 @@ export class TableComponent {
 
   getDynamicProperty(element: any, path: string): any {
     if (!element || !path) return '';
-    const keys = path.split('.');
-    let value = element;
-    for (const key of keys) {
-      if (value[key] === undefined) {
-        return '';
-      }
-      value = value[key];
+  const keys = path.split('.');
+  let value = element;
+  
+  for (const key of keys) {
+    if (value === null || value === undefined) {
+      return '';  
     }
-    return value;
+    value = value[key];
+  }
+    return value === null || value === undefined ? '' : value; 
   }
 
 }

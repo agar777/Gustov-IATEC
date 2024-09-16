@@ -11,7 +11,10 @@ public class EmployeeRepository: IEmployeeRepository
 
     public async Task<IEnumerable<Employee>> GetAll()
     {
-        return await context.Employees.ToListAsync();
+        return await context.Employees
+        .Include(e => e.Requests)
+        
+        .ToListAsync();
     }
 
     public async Task<Employee> GetById(int id)
